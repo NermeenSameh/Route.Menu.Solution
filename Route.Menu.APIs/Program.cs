@@ -1,6 +1,8 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Route.Menu.APIs.Extensions;
+using Route.Menu.APIs.Helpers;
 using Route.Menu.Core.Repositories.Contract;
 using Route.Menu.Infrastructure;
 using Route.Menu.Infrastructure.Data;
@@ -29,9 +31,7 @@ namespace Route.Menu.APIs
 				options.UseSqlServer(webApplicationBuilder.Configuration.GetConnectionString("DefaultConnection"));
 			});
 
-			webApplicationBuilder.Services.AddScoped(typeof(IGenericRepository<>) , typeof(GenericRepository<>));
-			
-			
+			webApplicationBuilder.Services.AddApplicationServices();
 			#endregion
 
 
@@ -65,7 +65,7 @@ namespace Route.Menu.APIs
 			}
 
 			app.UseHttpsRedirection();
-
+			app.UseStaticFiles();
 			app.UseAuthorization();
 
 
